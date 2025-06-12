@@ -52,7 +52,7 @@ public class UserService {
 //		return this.data.put(user.getId(), user);
 		Optional<User> existingUser = userRepo.findByEmail(userRegisterObj.getEmail());
 		if (existingUser.isPresent()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User user already exists ");
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User user already exists");
 		}
 		if (userRegisterObj.getRoles() == null || userRegisterObj.getRoles().isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User must have atleat one role");
