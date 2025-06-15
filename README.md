@@ -1,6 +1,7 @@
+
 # 📘 UserBlogApplication_RestAPI
-This is a RESTful API for a User Blog Application built using Spring Boot and Java. The application allows users to create and manage blogs, post comments, and perform other essential actions related to user blog management. The API is designed to support multiple users, each with their own blogs and comments.
-A secure, RESTful Spring Boot API that powers a multi-user blogging platform. It includes role-based access control, basic authentication, user registration/login, and blog post CRUD operations.
+
+A secure, RESTful Spring Boot API that powers a multi-user blogging platform. It includes role-based access control, JWT authentication, user registration/login, and blog post CRUD operations.
 
 ---
 
@@ -99,28 +100,6 @@ Content-Type: application/json
 }
 ```
 
-* **Login**
-
-```http
-POST /api/auth/login
-Content-Type: application/json
-
-{
-  "username": "shruti@gmail.com",
-  "password": "2428aab"
-}
-```
-
-* **Get All Users (secured)**
-
-```http
-GET /api/users
-Authorization: Bearer <your-token>
-```
-
-> ✅ Make sure to pass JWT token if your API is secured.
-
----
 
 ### 🛠️ Common Commands
 
@@ -136,18 +115,8 @@ Authorization: Bearer <your-token>
 ./mvnw test
 ```
 
----
 
-### ✅ Tips
 
-* Use Postman collections to save and group requests.
-* If 401 Unauthorized error occurs, verify:
-
-  * You are sending a valid JWT token.
-  * Your Spring Security config allows the endpoint.
-  * CORS and headers are properly set.
-
----
 
 ---
 
@@ -343,8 +312,8 @@ This section outlines the key design decisions and assumptions made during the d
    * **Repository** → Communicates with the database
      Promotes separation of concerns and cleaner maintainability.
 
-3. **JWT-Based Authentication**
-   Implemented secure stateless user authentication using **JSON Web Tokens (JWT)**, allowing users to log in and get access tokens for protected endpoints.
+3. **Basic Authentication**
+   Implemented secure stateless user authentication using **Basic Auth**, allowing users to log in and get access for protected endpoints.
 
 4. **Exception Handling**
    Used `@ControllerAdvice` and custom exception classes to handle and return user-friendly error responses (400, 401, 404, etc.).
@@ -376,10 +345,9 @@ This section outlines the key design decisions and assumptions made during the d
 
 1. **User roles** are predefined (e.g., `ROLE_USER`, `ROLE_ADMIN`) and assigned at registration or through admin privileges.
 2. **Username and email are unique** per user to avoid duplicate entries.
-3. **Token expiration** is assumed to be handled and refreshed manually by the client-side application.
-4. The application runs locally on `http://localhost:8080`.
-5. **Admin-level access** is required for operations like deleting other users or managing accounts globally.
-6. Project uses a **single-database instance** for simplicity; no multi-tenant or sharded DB setups.
+3. The application runs locally on `http://localhost:8080`.
+4. **Admin-level access** is required for operations like deleting other users or managing accounts globally. 
+5. Project uses a **single-database instance** for simplicity; no multi-tenant or sharded DB setups.
 
 ---
 
